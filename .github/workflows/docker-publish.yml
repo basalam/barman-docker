@@ -17,6 +17,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  LATEST_BUILT_BARMAN: ${{ secrets.LATEST_BUILT_BARMAN }}
 
 jobs:
   build:
@@ -77,7 +78,7 @@ jobs:
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
-        if: secrets.LATEST_BUILT_BARMAN != steps.generatetag.outputs.value
+        if: env.LATEST_BUILT_BARMAN != steps.generatetag.outputs.value
         with:
           context: .
           build-args: |
