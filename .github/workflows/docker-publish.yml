@@ -85,7 +85,7 @@ jobs:
             BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
             SOURCE_INSTALL=0
           push: true
-          tags: ${{ steps.generatetag.outputs.value }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.generatetag.outputs.value }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -96,7 +96,7 @@ jobs:
         with:
           context: .
           build-args: |
-            BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
+            BARMAN_VERSION=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.generatetag.outputs.value }}
             SOURCE_INSTALL=1
           push: true
           tags: nightly
