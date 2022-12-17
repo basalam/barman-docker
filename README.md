@@ -1,5 +1,7 @@
 # barman-docker
 
+[![Docker](https://github.com/basalam/barman-docker/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/basalam/barman-docker/actions/workflows/docker-publish.yml)
+
 Automatically made [barman](https://github.com/EnterpriseDB/barman/) Docker images
 
 Based on [ubc/barman-docker](https://github.com/ubc/barman-docker)
