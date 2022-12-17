@@ -6,7 +6,7 @@ FROM debian:bullseye
 ARG BARMAN_VERSION
 ARG SOURCE_INSTALL "0"
 
-RUN apt-get update &&
+RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates wget gnupg2 gosu tini && rm -rf /var/lib/apt/lists/* && \
     gosu nobody true
 
