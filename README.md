@@ -36,7 +36,7 @@ services:
   barman:
     restart: always
     ports:
-      - 127.0.0.1:9780:9780
+      - 127.0.0.1:9780:9780 # Needed for baramn exporter
     environment:
       - DB_HOST=172.17.1.1
       - DB_PORT=5432
@@ -45,6 +45,7 @@ services:
       - DB_REPLICATION_USER=replication
       - DB_REPLICATION_PASSWORD=supersecretreplication
       ## Check out other envs from config files templates and entrypoint
+      ## TODO: Make a complete list of envs
     volumes:
       - ./data:/var/lib/barman:rw # Barman Persistant data
       - ./recovery-data:/var/lib/barman/recover:rw # Baramn Recover path
