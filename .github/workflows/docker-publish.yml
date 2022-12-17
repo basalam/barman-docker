@@ -76,7 +76,7 @@ jobs:
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
-        id: build-and-push
+        id: build-and-push-release
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         if: env.LATEST_BUILT_BARMAN != steps.generatetag.outputs.value
         with:
@@ -91,7 +91,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Build and push Docker image (Nightly)
-        id: build-and-push
+        id: build-and-push-nightly
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
           context: .
