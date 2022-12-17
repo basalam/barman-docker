@@ -62,7 +62,7 @@ jobs:
         id: barman_version
         uses: pozetroninc/github-action-get-latest-release@master
         with:
-          exclude_types: draft|prerelease
+          excludes: draft,prerelease
           repository: EnterpriseDB/barman
 
       - name: Remove `release/` from barman tag name
