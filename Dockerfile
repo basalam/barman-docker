@@ -7,7 +7,7 @@ ARG BARMAN_VERSION
 ARG SOURCE_INSTALL "0"
 
 RUN apt-get update &&
-    apt-get install -y --no-install-recommends ca-certificates wget gnupg2 gosu tini && rm -rf /var/lib/apt/lists/* &&
+    apt-get install -y --no-install-recommends ca-certificates wget gnupg2 gosu tini && rm -rf /var/lib/apt/lists/* && \
     gosu nobody true
 
 # Install postgres 9.4, 9.5, 9.6 clients.  This is so that barman can use the
@@ -21,9 +21,9 @@ RUN apt-get update &&
 #   python: Needed to run barman
 #   rsync: Needed to rsync basebackups from the database servers
 #   gettext-base: envsubst
-RUN bash -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' &&
-    (wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -) &&
-    apt-get update &&
+RUN bash -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' && \
+    (wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -) && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
         cron \
         gcc \
@@ -42,9 +42,9 @@ RUN bash -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg ma
         rsync \
         gettext-base \
         procps &&
-    rm -rf /var/lib/apt/lists/* &&
-    rm -f /etc/crontab /etc/cron.*/* &&
-    sed -i 's/\(.*pam_loginuid.so\)/#\1/' /etc/pam.d/cron &&
+    rm -rf /var/lib/apt/lists/* && \
+    rm -f /etc/crontab /etc/cron.*/* && \
+    sed -i 's/\(.*pam_loginuid.so\)/#\1/' /etc/pam.d/cron && \
     mkdir -p /etc/barman/barman.d
 
 # Set up some defaults for file/directory locations used in entrypoint.sh.
