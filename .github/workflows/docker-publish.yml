@@ -32,7 +32,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          repository: 'https://github.com/EnterpriseDB/barman.git'
+          repository: 'EnterpriseDB/barman'
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
