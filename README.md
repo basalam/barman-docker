@@ -21,7 +21,7 @@ we have `latest` tag that is connected to the letest (stable) relese of barman a
 
 This image is tested with [adfinis barman Helm Chart](https://github.com/adfinis/helm-charts/tree/main/charts/barman)
 
-and you can use it easly
+and you can use it easly by setting the image
 
 ### Docker Compose
 
@@ -35,8 +35,9 @@ version: "3.3"
 services:
   barman:
     restart: always
+    image: ghcr.io/basalam/barman-docker:latest
     ports:
-      - 127.0.0.1:9780:9780 # Needed for baramn exporter
+      - 127.0.0.1:9780:9780 # Needed for barman exporter
     environment:
       - DB_HOST=172.17.1.1
       - DB_PORT=5432
