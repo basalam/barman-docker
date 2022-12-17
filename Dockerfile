@@ -93,5 +93,5 @@ VOLUME /node_exporter
 ENTRYPOINT ["tini", "--", "/entrypoint.sh"]
 CMD ["cron", "-L", "4", "-f"]
 COPY entrypoint.sh /
-RUN chmod +x /tmp/install_barman.sh
+RUN chmod +x /entrypoint.sh
 WORKDIR ${BARMAN_DATA_DIR}
