@@ -41,7 +41,7 @@ RUN bash -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg ma
         python3-distutils \
         rsync \
         gettext-base \
-        procps &&
+        procps && \
     rm -rf /var/lib/apt/lists/* && \
     rm -f /etc/crontab /etc/cron.*/* && \
     sed -i 's/\(.*pam_loginuid.so\)/#\1/' /etc/pam.d/cron && \
