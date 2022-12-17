@@ -10,14 +10,14 @@ Based on [ubc/barman-docker](https://github.com/ubc/barman-docker)
 
 Every barman Docker image made manually But we want to have something to be automatically built and ready to use
 
-With the help of github actions `schedule` feature we are using we are check for realeses every night and if the relese is new we will build it.
+With the help of github actions `schedule` feature we are using we are check for realeses every night and if the release is new we will build it.
 
-Also we are taking care of nightly releses directly from source code of barman
+Also we are taking care of nightly releases directly from source code of barman
 
 ## Usage
 
 As for images goes we have a `nightly` tag that is up to date with the latest source code from barman
-we have `latest` tag that is connected to the letest (stable) relese of barman and of course for each relese we have a tag if you want to make your barman deployment version fixed.
+we have `latest` tag that is connected to the letest (stable) release of barman and of course for each release we have a tag if you want to make your barman deployment version fixed.
 
 ### Kubernetes
 
