@@ -69,7 +69,7 @@ jobs:
         uses: mad9000/actions-find-and-replace-string@1
         id: generatetag
         with:
-          source: ${{ steps.barman_version.outputs.tag_name }}
+          source: ${{ steps.barman_version.outputs.release }}
           find: "release/"
           replace: ""
 
