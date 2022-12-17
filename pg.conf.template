@@ -1,4 +1,4 @@
-[${DB_HOST}]
+[pg]
 active = true
 description =  "PostgreSQL Database (Streaming-Only)"
 conninfo = host=${DB_HOST} user=${DB_SUPERUSER} dbname=${DB_SUPERUSER_DATABASE}

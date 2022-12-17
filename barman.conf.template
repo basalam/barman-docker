@@ -25,5 +25,5 @@ streaming_archiver = on
 ; wal_retention_policy = main
 
 ; use empty log_file for stderr output
-log_file = ""
+log_file = "/var/log/barman.log"
 log_level = ${BARMAN_LOG_LEVEL}
