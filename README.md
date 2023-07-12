@@ -1,6 +1,8 @@
 # barman-docker
 
 [![Docker](https://github.com/basalam/barman-docker/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/basalam/barman-docker/actions/workflows/docker-publish.yml)
+[![Docker Tags](https://ghcr-badge.egpl.dev/basalam/barman-docker/tags?trim=major&color=green_2&label=Docker%20Tags)](https://ghcr.io/basalam/barman-docker/)
+[![Docker Tags](https://ghcr-badge.egpl.dev/basalam/barman-docker/tags?trim=patch&color=green_2&label=Docker%20Tags)](https://ghcr.io/basalam/barman-docker/)
 
 Automatically made [barman](https://github.com/EnterpriseDB/barman/) Docker images
 
