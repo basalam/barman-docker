@@ -30,9 +30,6 @@ RUN bash -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg ma
         libpq-dev \
         libpython3-dev \
         openssh-client \
-        postgresql-client-9.5 \
-        postgresql-client-9.6 \
-        postgresql-client-10 \
         postgresql-client-11 \
         postgresql-client-12 \
         postgresql-client-13 \
