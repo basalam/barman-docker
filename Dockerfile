@@ -7,7 +7,7 @@ ARG BARMAN_VERSION
 ARG SOURCE_INSTALL "0"
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates wget gnupg2 gosu tini && rm -rf /var/lib/apt/lists/* && \
+    apt-get install -y --no-install-recommends ca-certificates wget gnupg2 gosu tini tmux && rm -rf /var/lib/apt/lists/* && \
     gosu nobody true
 
 # Install postgres 9.4, 9.5, 9.6 clients.  This is so that barman can use the
