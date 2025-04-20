@@ -15,11 +15,9 @@ on:
 
 env:
   # Use docker.io for Docker Hub if empty
-  # REGISTRY: ghcr.io
-  REGISTRY: docker.basalam.dev
+  REGISTRY: ghcr.hamdocker.ir
   # github.repository as <account>/<repo>
-  # IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME: basalam-tools/barman
+  IMAGE_NAME: ${{ github.repository }}
   LATEST_BUILT_BARMAN: ${{ secrets.LATEST_BUILT_BARMAN }}
 
 jobs:
@@ -49,12 +47,9 @@ jobs:
       - name: Log into registry ${{ env.REGISTRY }}
         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
         with:
-          # registry: ${{ env.REGISTRY }}
-          # username: ${{ github.actor }}
-          # password: ${{ secrets.GITHUB_TOKEN }}
           registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
