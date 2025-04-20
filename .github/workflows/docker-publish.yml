@@ -74,6 +74,11 @@ jobs:
           find: "release/"
           replace: ""
 
+      - name: Debug tag and release
+        run: |
+          echo "Release: ${{ steps.barman_version.outputs.release }}"
+          echo "Tag: ${{ steps.generatetag.outputs.value }}"
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
