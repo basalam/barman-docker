@@ -5,12 +5,12 @@ name: Docker
 # separate terms of service, privacy policy, and support
 # documentation.
 
-on:
-  schedule:
-    - cron: "35 3 * * *"
-  push:
-    branches:
-      - main
+on: workflow_dispatch
+  # schedule:
+  #   - cron: "35 3 * * *"
+  # push:
+  #   branches:
+  #     - main
 
 env:
   # Use docker.io for Docker Hub if empty
