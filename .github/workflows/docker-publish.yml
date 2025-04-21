@@ -15,7 +15,7 @@ on:
 
 env:
   # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.hamdocker.ir
+  REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   LATEST_BUILT_BARMAN: ${{ secrets.LATEST_BUILT_BARMAN }}
