@@ -83,7 +83,7 @@ COPY pg.conf.template /etc/barman/barman.d/pg.conf.template
 ENV PYTHONPATH: "${PYTHONPATH}:/opt/barman"
 
 # Install barman exporter
-RUN pip install barman-exporter && mkdir /node_exporter
+RUN pip install boto3 barman-exporter && mkdir /node_exporter
 VOLUME /node_exporter
 
 # Install the entrypoint script.  It will set up ssh-related things and then run
