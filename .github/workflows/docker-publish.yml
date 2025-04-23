@@ -59,12 +59,16 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Get Barman Latest Release
+      # - name: Get Barman Latest Release
+      #   id: barman_version
+      #   uses: pozetroninc/github-action-get-latest-release@master
+      #   with:
+      #     excludes: draft,prerelease
+      #     repository: EnterpriseDB/barman
+
+      - name: Set specific Barman version
         id: barman_version
-        uses: pozetroninc/github-action-get-latest-release@master
-        with:
-          excludes: draft,prerelease
-          repository: EnterpriseDB/barman
+        run: echo "release=3.9.0" >> "$GITHUB_OUTPUT"
 
       - name: Remove `release/` from barman tag name
         uses: mad9000/actions-find-and-replace-string@1
