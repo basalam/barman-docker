@@ -25,6 +25,8 @@ RUN bash -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg ma
     (wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -) && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
+        vim \
+        tmux \
         cron \
         gcc \
         libpq-dev \
@@ -83,7 +85,7 @@ COPY pg.conf.template /etc/barman/barman.d/pg.conf.template
 ENV PYTHONPATH: "${PYTHONPATH}:/opt/barman"
 
 # Install barman exporter
-RUN pip install boto3 barman-exporter && mkdir /node_exporter
+RUN pip install boto3 s3cmd barman-exporter && mkdir /node_exporter
 VOLUME /node_exporter
 
 # Install the entrypoint script.  It will set up ssh-related things and then run
