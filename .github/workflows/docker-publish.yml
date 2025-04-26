@@ -77,54 +77,54 @@ jobs:
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      # - name: Build and push Docker image
-      #   id: build-and-push-release
-      #   uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
-      #   # if: (env.LATEST_BUILT_BARMAN != steps.generatetag.outputs.value) || (github.event_name == 'push')
-      #   with:
-      #     context: .
-      #     build-args: |
-      #       BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
-      #       SOURCE_INSTALL=0
-      #     push: true
-      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.generatetag.outputs.value }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-      #     labels: ${{ steps.meta.outputs.labels }}
-      #     cache-from: type=gha
-      #     cache-to: type=gha,mode=max
-
-      # - name: Build and push Docker image (Nightly)
-      #   id: build-and-push-nightly
-      #   uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
-      #   with:
-      #     context: .
-      #     build-args: |
-      #       BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
-      #       SOURCE_INSTALL=1
-      #     push: true
-      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:nightly
-      #     labels: ${{ steps.meta.outputs.labels }}
-      #     cache-from: type=gha
-      #     cache-to: type=gha,mode=max
-
       - name: Build and push Docker image
-        id: build-and-push-manual
+        id: build-and-push-release
         uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
+        # if: (env.LATEST_BUILT_BARMAN != steps.generatetag.outputs.value) || (github.event_name == 'push')
         with:
           context: .
           build-args: |
-            BARMAN_VERSION="3.9.0"
-            SOURCE_INSTALL=1
+            BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
+            SOURCE_INSTALL=0
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:3.9.0
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.generatetag.outputs.value }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      # - uses: hmanzur/actions-set-secret@v2.0.0
+      - name: Build and push Docker image (Nightly)
+        id: build-and-push-nightly
+        uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
+        with:
+          context: .
+          build-args: |
+            BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
+            SOURCE_INSTALL=1
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:nightly
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # - name: Build and push Docker image
+      #   id: build-and-push-manual
+      #   uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
       #   with:
-      #     name: "LATEST_BUILT_BARMAN"
-      #     value: "${{ steps.generatetag.outputs.value }}"
-      #     token: ${{ secrets.SECRET_UPDATE_TOKEN }}
+      #     context: .
+      #     build-args: |
+      #       BARMAN_VERSION="3.9.0"
+      #       SOURCE_INSTALL=1
+      #     push: true
+      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:3.9.0
+      #     labels: ${{ steps.meta.outputs.labels }}
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
+
+      - uses: hmanzur/actions-set-secret@v2.0.0
+        with:
+          name: "LATEST_BUILT_BARMAN"
+          value: "${{ steps.generatetag.outputs.value }}"
+          token: ${{ secrets.SECRET_UPDATE_TOKEN }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
