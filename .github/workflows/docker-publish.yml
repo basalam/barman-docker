@@ -61,11 +61,11 @@ jobs:
 
       - name: Get Barman Latest Release
         id: barman_version
-        # uses: pozetroninc/github-action-get-latest-release@master
-        # with:
-        #   excludes: draft,prerelease
-        #   repository: EnterpriseDB/barman
-        run: echo "release=3.9.0" >> "$GITHUB_OUTPUT"
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          excludes: draft,prerelease
+          repository: EnterpriseDB/barman
+        # run: echo "release=3.9.0" >> "$GITHUB_OUTPUT"
 
       - name: Remove `release/` from barman tag name
         uses: mad9000/actions-find-and-replace-string@1
@@ -77,31 +77,45 @@ jobs:
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image
-        id: build-and-push-release
-        uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
-        # if: (env.LATEST_BUILT_BARMAN != steps.generatetag.outputs.value) || (github.event_name == 'push')
-        with:
-          context: .
-          build-args: |
-            BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
-            SOURCE_INSTALL=0
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.generatetag.outputs.value }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      # - name: Build and push Docker image
+      #   id: build-and-push-release
+      #   uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
+      #   # if: (env.LATEST_BUILT_BARMAN != steps.generatetag.outputs.value) || (github.event_name == 'push')
+      #   with:
+      #     context: .
+      #     build-args: |
+      #       BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
+      #       SOURCE_INSTALL=0
+      #     push: true
+      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.generatetag.outputs.value }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+      #     labels: ${{ steps.meta.outputs.labels }}
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
 
-      - name: Build and push Docker image (Nightly)
-        id: build-and-push-nightly
+      # - name: Build and push Docker image (Nightly)
+      #   id: build-and-push-nightly
+      #   uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
+      #   with:
+      #     context: .
+      #     build-args: |
+      #       BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
+      #       SOURCE_INSTALL=1
+      #     push: true
+      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:nightly
+      #     labels: ${{ steps.meta.outputs.labels }}
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
+
+      - name: Build and push Docker image
+        id: build-and-push-manual
         uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
         with:
           context: .
           build-args: |
-            BARMAN_VERSION=${{ steps.generatetag.outputs.value }}
+            BARMAN_VERSION="3.9.0"
             SOURCE_INSTALL=1
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:nightly
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:3.9.0
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
